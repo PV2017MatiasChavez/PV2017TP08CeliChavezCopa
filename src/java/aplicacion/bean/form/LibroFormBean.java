@@ -19,7 +19,7 @@ import javax.faces.bean.ViewScoped;
 public class LibroFormBean {
     private ColeccionLibros libros;
     private Libro libro;
-    private String isbn;
+    private int isbn;
     private String titulo;
     private String autor;
     private double precio;
@@ -68,14 +68,14 @@ public class LibroFormBean {
     /**
      * @return the isbn
      */
-    public String getIsbn() {
+    public int getIsbn() {
         return isbn;
     }
 
     /**
      * @param isbn the isbn to set
      */
-    public void setIsbn(String isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
