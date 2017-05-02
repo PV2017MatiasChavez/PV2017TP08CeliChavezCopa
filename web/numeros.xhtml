@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Punto_1</title>
+    </h:head>
+    <h:body>
+        <p:panel id="pnlNumeros"
+                 header="Ingreso Números"
+                 style="width: 400px"
+                 footer="Escuela de Minas - PV2017">
+            <h:form id="frmNumeros">
+                <p:message id="msgMensaje" for="txtNumero"/>
+                <p:panelGrid id="tblNumeros" columns="2">
+                    <p:outputLabel id="lblNumero" value="Ingresar Número:"/>
+                    <p:inputText id="txtNumero"
+                                 value="#{numeroFormBean.number}"
+                                 required="true" size="1"/>
+                    <p:inputText id="datos" value="#{numeroFormBean.numeros.texto}"/>
+                    <p:commandButton id="btnAgregarNumeros"
+                                     value="Agregar"
+                                     actionListener="#{numeroFormBean.agregarNumero()}"
+                                     update="tblNumeros msgMensaje"/>
+                    
+                    <h:panelGrid id="mym" columns="2">
+                        <p:outputLabel id="mayor" value="Mayor:"/>
+                        <p:inputText id="txtMayor" value="#{numeroFormBean.mayor}" size="1"/>
+                        <p:outputLabel id="menor" value="Menor:"/>
+                        <p:inputText id="txtMenor" value="#{numeroFormBean.menor}" size="1"/>
+                        <p:outputLabel id="promedio" value="Promedio:"/>
+                        <p:inputText id="txtPromedio" value="#{numeroFormBean.promedio}" size="1"/>
+                        
+                    </h:panelGrid>
+                    <p:commandButton id="calcular" value="Calcular"
+                                         action="#{numeroFormBean.calcularMayMenProm()}" update="mym"/>
+                </p:panelGrid>
+                
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
