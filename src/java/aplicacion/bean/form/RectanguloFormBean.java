@@ -20,11 +20,11 @@ import javax.faces.bean.ViewScoped;
 public class RectanguloFormBean implements Serializable {
     private ColeccionRectangulo rectangulos;
     private Rectangulo rectangulo;
-    private int puntos,x1,y1;
-    private int base;
-    private int altura;
-    private int sup;
-    private int per;
+    private int puntos,x1=0,y1=0;
+    private int base=0;
+    private int altura=0;
+    private int sup=0;
+    private int per=0;
     /**
      * Creates a new instance of RectanguloFormBean
      */
@@ -33,7 +33,7 @@ public class RectanguloFormBean implements Serializable {
     }
     
     public void agregarRectangulos(){
-        setRectangulo(new Rectangulo(getX1(),getY1(),getBase(),getAltura(),getSup(),getPer()));
+        setRectangulo(new Rectangulo(getX1(),getY1(),getBase(),getAltura(),calcularSuperficie(),calcularPerimetro()));
         getRectangulos().agregarRectangulos(getRectangulo());
     }
     
@@ -46,11 +46,11 @@ public class RectanguloFormBean implements Serializable {
         getRectangulos().eliminarRectangulos(getRectangulo());
     }
 
-    public double calcularSuperficie(){
+    public int calcularSuperficie(){
         setSup(getAltura() * getBase());
         return getSup();
     }
-    public double calcularPerimetro(){
+    public int calcularPerimetro(){
         setPer(getAltura() * 2 + getBase() * 2);
         return getPer();
     }

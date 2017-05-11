@@ -8,8 +8,7 @@
     </h:head>
     <h:body>
         <p:panel id="plnRectangulos" header="Alta de Rectangulos">
-            <h:form id="frmRectangulos">
-                
+            <h:form id="frmRectangulos">                
                     <h:panelGrid id="tblREC" columns="5">
                         <p:outputLabel id="lblA1" value="Punto A: (" />
                         <p:inputText id="txtA1X" value="#{rectanguloFormBean.x1}" size="5" />
@@ -23,13 +22,11 @@
                                  required="true" />
                     <p:outputLabel for="txtAltura" value="Altura:"/>
                     <p:inputText id="txtAltura" value="#{rectanguloFormBean.altura}" 
-                                 required="true" />
-                             
+                                 required="true" />                             
                     <p:commandButton id="btnAgregarRectangulos" value="Agregar" 
                                      actionListener="#{rectanguloFormBean.agregarRectangulos()}" 
                                      update="tblMuestraRectangulos" />
-                </p:panelGrid>
-                
+                </p:panelGrid>                
                 <p:panelGrid id="tblMuestraRectangulos" columns="7" >
                     <p:dataTable id="dtTblRectangulos" value="#{rectanguloFormBean.rectangulos.rectangulos}"                                  
                                  var="cadaRectangulo" emptyMessage="No hay nada">
@@ -44,10 +41,10 @@
                             <p:outputLabel value="#{cadaRectangulo.altura}"/>
                         </p:column>
                         <p:column headerText="Perimetro">
-                            <p:outputLabel value="#{rectanguloFormBean.calcularPerimetro()}"/>
+                            <p:outputLabel value="#{cadaRectangulo.per}"/>
                         </p:column>
                         <p:column headerText="Superficie">
-                            <p:outputLabel value="#{rectanguloFormBean.calcularSuperficie()}"/>
+                            <p:outputLabel value="#{cadaRectangulo.sup}"/>
                         </p:column>
                         <p:column headerText="Edicion">                            
                             <p:commandButton icon="ui-icon-trash" 
@@ -58,18 +55,21 @@
                     </p:dataTable>
                 </p:panelGrid>
             </h:form>
-        </p:panel>       
-                         
+        </p:panel>         
         
-        
-        <p:dialog id="dlgEliminarRectangulos" widgetVar="eliminarRectangulos" 
+                <p:dialog id="dlgEliminarRectangulos" widgetVar="eliminarRectangulos" 
                   header="Eliminacion de Rectangulos" resizable="false" 
                   showEffect="explode" hideEffect="explode" modal="true">
             <h:form id="frmEliminarRectangulos">
-                <h:panelGrid id="pnlEliminarRectangulos" columns="2">
-                    <p:outputLabel for="puntos" value="Punto: "/>
+              
+                    <h:panelGrid id="pnlEliminarpuntos" columns="3">
+                    <p:outputLabel for="puntos" value="Puntos: "/>
                     <p:inputText id="puntos" required="true" 
-                                 value="#{rectanguloFormBean.rectangulo.puntos}"/>
+                                 value="#{rectanguloFormBean.rectangulo.x1}"/>
+                    <p:inputText id="puntos2" required="true" 
+                                 value="#{rectanguloFormBean.rectangulo.y1}"/>
+                    </h:panelGrid>
+                <h:panelGrid id="pnlEliminarRectangulos" columns="2">                    
                     <p:outputLabel for="base" value="Base: "/>
                     <p:inputText id="base" required="true" 
                                  value="#{rectanguloFormBean.rectangulo.base}"/>
@@ -85,11 +85,19 @@
                     <p:commandButton id="btnEliminarRectangulos" value="Eliminar" 
                                      oncomplete="PF('eliminarRectangulos').hide()" 
                                      update=":frmRectangulos" actionListener="#{rectanguloFormBean.eliminarRectangulos()}">
-                   
+                   <p:confirm header="Pedido de Confirmacion" 
+                                   message="¿Confirma Eliminar rectangulo?" icon="ui-icon-alert"/>
                     </p:commandButton>
                     <p:commandButton id="btnCerrarEliminarRectangulos" 
                                      value="Salir" 
                                      oncomplete="PF('eliminarRectangulos').hide()"/>
+                    <p:confirmDialog id="frmconfirmacionDialogoRectangulo" 
+                                     global="true" showEffect="fade" hideEffect="fade">
+                        <h:form id="frmConfirmacionOperacionRectangulo">
+                            <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
+                        </h:form>
+                    </p:confirmDialog> 
                 </h:panelGrid>
             </h:form>
         </p:dialog>
